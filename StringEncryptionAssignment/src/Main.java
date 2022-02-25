@@ -45,7 +45,7 @@ public class Main
             encryptedString[i] += encryptedNumber;
 
             // Debugging code to see original chars and encrypted chars
-            // System.out.println(encryptedString[i] + "\t" + inputString.charAt(i));
+            //System.out.println(encryptedString[i] + "\t" + inputString.charAt(i));
         }
 
         // print out encrypted word
@@ -88,7 +88,7 @@ public class Main
                 translatedChar[i] = (char) originalValue;
 
                 // Debugging code to see original chars and encrypted chars
-                //System.out.println(originalCharacter + "\t" + encryptedString[i]);
+                //System.out.println(translatedChar[i] + "\t" + encryptedString[i]);
             }
 
             // print out original word
