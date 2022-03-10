@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Aaron-Programing-11-Hand-In.iml" filepath="$PROJECT_DIR$/.idea/Aaron-Programing-11-Hand-In.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AddInsertDeleteArraysAssignment/AddInsertDeleteArraysAssignment.iml" filepath="$PROJECT_DIR$/AddInsertDeleteArraysAssignment/AddInsertDeleteArraysAssignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataAbstraction/DataAbstraction.iml" filepath="$PROJECT_DIR$/DataAbstraction/DataAbstraction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Drawing With Text Assignment/Drawing With Text Assignment.iml" filepath="$PROJECT_DIR$/Drawing With Text Assignment/Drawing With Text Assignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Expressions Assignment/Expressions Assignment.iml" filepath="$PROJECT_DIR$/Expressions Assignment/Expressions Assignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GameLoopAssignment/GameLoopAssignment.iml" filepath="$PROJECT_DIR$/GameLoopAssignment/GameLoopAssignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProjectNumber1/ProjectNumber1.iml" filepath="$PROJECT_DIR$/ProjectNumber1/ProjectNumber1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RockPaperScissorsAssignment/RockPaperScissorsAssignment.iml" filepath="$PROJECT_DIR$/RockPaperScissorsAssignment/RockPaperScissorsAssignment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SchoolProject/SchoolProject.iml" filepath="$PROJECT_DIR$/SchoolProject/SchoolProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StringEncryptionAssignment/StringEncryptionAssignment.iml" filepath="$PROJECT_DIR$/StringEncryptionAssignment/StringEncryptionAssignment.iml" />
+    </modules>
+  </component>
+</project>
