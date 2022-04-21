@@ -34,10 +34,10 @@ public class Controller
         guessLowerBtn.setDisable(true);
         rollBtn.setDisable(true);
 
-        winnerDisplayedTxt.setText("");
+        winnerDisplayedTxt.setText("Good Luck!");
         rollDisplayTxt.setText("Start The Round");
         totalMoneyTxt.setText("Total Money: $" + player.getTotalMoney());
-        betTxt.setText("Bet: $0");
+        betTxt.setText("Bet: $" + player.getBet());
         guessTxt.setText("Guess:");
     }
 
@@ -105,6 +105,13 @@ public class Controller
 
     public void startRound(ActionEvent actionEvent)
     {
+        if (player.getTotalMoney() == 0)
+        {
+            rollDisplayTxt.setText("Out of Money!");
+            winnerDisplayedTxt.setText("Start a New Game");
+            return;
+        }
+
         winnerDisplayedTxt.setText("Round In Progress");
 
         betDecreaseBtn.setDisable(true);

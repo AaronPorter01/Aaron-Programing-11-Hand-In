@@ -11,33 +11,7 @@
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="10.0">
          <children>
-            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="600.0" spacing="75.0" translateY="-15.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CPU" underline="true">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="38.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bet: $0">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                        <Text layoutX="45.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guess:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
-            <Text fx:id="rollDisplayTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Start The Round" translateY="-10.0">
+            <Text fx:id="rollDisplayTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Start A New Game" translateY="5.0">
                <font>
                   <Font size="64.0" />
                </font>
@@ -45,12 +19,12 @@
                   <Insets />
                </VBox.margin>
             </Text>
-            <Text fx:id="winnerDisplayedTxt" layoutX="82.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" translateY="-20.0">
+            <Text fx:id="winnerDisplayedTxt" layoutX="82.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" translateY="10.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="143.0" prefWidth="600.0">
+            <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="143.0" prefWidth="600.0" translateY="40.0">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="300.0">
                      <children>
@@ -88,7 +62,7 @@
                               <Font size="36.0" />
                            </font>
                         </Text>
-                        <Text fx:id="totalMoneyTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Money:" />
+                        <Text fx:id="totalMoneyTxt" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Money: $0" />
                         <Text fx:id="betTxt" layoutX="10.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bet: $0" />
                         <Text fx:id="guessTxt" layoutX="10.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guess:" />
                      </children>
