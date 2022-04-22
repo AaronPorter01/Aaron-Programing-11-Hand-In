@@ -4,6 +4,7 @@ import javafx.scene.text.Text;
 
 public class Controller
 {
+    // gui variables
     public Button betIncreaseBtn;
     public Button betDecreaseBtn;
     public Button newGameBtn;
@@ -17,16 +18,19 @@ public class Controller
     public Text rollDisplayTxt;
     public Text winnerDisplayedTxt;
 
+    // custom variables
     private Player player = new Player();
     private int roll1 = 0;
     private int roll2 = 0;
     private boolean hasGuessed = false;
 
+    // when player makes a new game
     public void newGame(ActionEvent actionEvent)
     {
         player = new Player();
         hasGuessed = false;
 
+        // set other buttons to correct state
         startRoundBtn.setDisable(false);
         betDecreaseBtn.setDisable(true);
         betIncreaseBtn.setDisable(true);
@@ -34,6 +38,7 @@ public class Controller
         guessLowerBtn.setDisable(true);
         rollBtn.setDisable(true);
 
+        // set correct text
         winnerDisplayedTxt.setText("Good Luck!");
         rollDisplayTxt.setText("Start The Round");
         totalMoneyTxt.setText("Total Money: $" + player.getTotalMoney());
@@ -41,13 +46,17 @@ public class Controller
         guessTxt.setText("Guess:");
     }
 
+    // when player adds to their bet
     public void betIncrease(ActionEvent actionEvent)
     {
+        // check that player isn't going over money limit
         if (player.getBet() < player.getTotalMoney())
         {
             player.increaseBet();
             betTxt.setText("Bet: $" + player.getBet());
 
+            // check if player can still increase bet
+            // if they can't disable button
             if (player.getBet() == player.getTotalMoney())
             {
                 betIncreaseBtn.setDisable(true);
@@ -61,13 +70,17 @@ public class Controller
         }
     }
 
+    // when player removes from their bet
     public void betDecrease(ActionEvent actionEvent)
     {
+        // check player bet isn't going under 0
         if (player.getBet() != 0)
         {
             player.decreaseBet();
             betTxt.setText("Bet: $" + player.getBet());
 
+            // check if player can still decrease bet
+            // if they can't disable button
             if (player.getBet() == 0)
             {
                 betDecreaseBtn.setDisable(true);
@@ -81,6 +94,7 @@ public class Controller
         }
     }
 
+    // when player guesses the next roll will be higher
     public void guessHigher(ActionEvent actionEvent)
     {
         player.setGuessedHigher(true);
@@ -92,6 +106,7 @@ public class Controller
         canRoll();
     }
 
+    // when player guesses the next roll will be lower
     public void guessLower(ActionEvent actionEvent)
     {
         player.setGuessedHigher(false);
@@ -103,8 +118,10 @@ public class Controller
         canRoll();
     }
 
+    // when player starts a new round
     public void startRound(ActionEvent actionEvent)
     {
+        // check player still has money
         if (player.getTotalMoney() == 0)
         {
             rollDisplayTxt.setText("Out of Money!");
@@ -114,16 +131,20 @@ public class Controller
 
         winnerDisplayedTxt.setText("Round In Progress");
 
+        // set buttons to correct state
         betDecreaseBtn.setDisable(true);
         betIncreaseBtn.setDisable(false);
         guessHigherBtn.setDisable(false);
         guessLowerBtn.setDisable(false);
 
+        // reset values from last round
         player.setBet(0);
         betTxt.setText("Bet: $" + player.getBet());
         hasGuessed = false;
         guessTxt.setText("Guess:");
 
+        // do first roll
+        // do until the program gets a number between 0 and 20
         do
         {
             double random = Math.random() * 100;
@@ -131,17 +152,22 @@ public class Controller
             System.out.println(roll1);
         } while (roll1 > 20 || roll1 < 0);
 
+        // display roll
         rollDisplayTxt.setText("Roll: " + roll1);
         startRoundBtn.setDisable(true);
     }
 
+    // when player starts second roll
     public void roll(ActionEvent actionEvent)
     {
+        // set button states
         betDecreaseBtn.setDisable(true);
         betIncreaseBtn.setDisable(true);
         guessHigherBtn.setDisable(true);
         guessLowerBtn.setDisable(true);
 
+        // do second roll
+        // do until the program gets a number between 0 and 20
         do
         {
             double random = Math.random() * 100;
@@ -149,6 +175,7 @@ public class Controller
             System.out.println(roll2);
         } while (roll2 > 20 || roll2 < 0);
 
+        // set display texts and button states
         rollDisplayTxt.setText("Roll: " + roll2);
         startRoundBtn.setDisable(false);
         rollBtn.setDisable(true);
@@ -158,6 +185,7 @@ public class Controller
         hasWon();
     }
 
+    // checks if player can trigger next roll or not
      public void canRoll()
      {
          if (player.getBet() != 0 && hasGuessed)
@@ -170,10 +198,12 @@ public class Controller
          }
      }
 
+     // checks if player has won the round
      public void hasWon()
      {
          boolean higherWon;
 
+         // compares both rolls
          if (roll1 == roll2)
          {
              higherWon = false;
@@ -187,6 +217,8 @@ public class Controller
              higherWon = false;
          }
 
+         // checks whether the players guess was correct
+         // displays correct message and adds or removes money
          if (higherWon)
          {
              if (player.getGuessedHigher())

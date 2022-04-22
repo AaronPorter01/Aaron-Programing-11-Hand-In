@@ -1,15 +1,19 @@
 public class Player
 {
+    // declare variables
     private int totalMoney;
     private int bet;
     private boolean guessedHigher;
 
+    // constructor
     Player()
     {
         this.totalMoney = 500;
         this.bet = 0;
         this.guessedHigher = false;
     }
+
+    // variable modify functions
 
     public int increaseBet()
     {
@@ -33,11 +37,6 @@ public class Player
     public int getTotalMoney()
     {
         return totalMoney;
-    }
-
-    public void setTotalMoney(int totalMoney)
-    {
-        this.totalMoney = totalMoney;
     }
 
     public void addMoney()
