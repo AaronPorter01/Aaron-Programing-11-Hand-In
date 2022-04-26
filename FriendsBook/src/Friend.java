@@ -1,10 +1,87 @@
 public class Friend
 {
+    // variable declaration
     private String firstName;
     private String lastName;
-    private int birthDay;
-    private int birthMonth;
-    private int birthYear;
+    private String birthDay;
+    private String birthMonth;
+    private String birthYear;
     private String hobby;
 
+    // constructor
+    Friend(String _firstName, String _lastName, String _birthDay, String _birthMonth, String _birthYear, String _hobby)
+    {
+        firstName = _firstName;
+        lastName = _lastName;
+        birthDay = _birthDay;
+        birthMonth = _birthMonth;
+        birthYear = _birthYear;
+        hobby = _hobby;
+    }
+
+    // getters and setters
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public String getBirthDay()
+    {
+        return birthDay;
+    }
+
+    public void setBirthDay(String birthDay)
+    {
+        this.birthDay = birthDay;
+    }
+
+    public String getBirthMonth()
+    {
+        return birthMonth;
+    }
+
+    public void setBirthMonth(String birthMonth)
+    {
+        this.birthMonth = birthMonth;
+    }
+
+    public String getBirthYear()
+    {
+        return birthYear;
+    }
+
+    public void setBirthYear(String birthYear)
+    {
+        this.birthYear = birthYear;
+    }
+
+    public String getHobby()
+    {
+        return hobby;
+    }
+
+    public void setHobby(String hobby)
+    {
+        this.hobby = hobby;
+    }
+
+    public String toString()
+    {
+        return firstName + " " + lastName;
+    }
 }

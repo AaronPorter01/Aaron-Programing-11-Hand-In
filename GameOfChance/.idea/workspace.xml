@@ -7,25 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2972de5-6310-4c70-85b5-2c23101dae50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/.idea/description.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/.idea/project-template.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/.idea/template-meta.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/FriendsBook.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/out/production/FriendsBook/Controller.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/out/production/FriendsBook/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/out/production/FriendsBook/sample.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/src/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/src/Friend.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../FriendsBook/src/sample.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
