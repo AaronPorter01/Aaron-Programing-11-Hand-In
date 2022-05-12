@@ -1,12 +1,10 @@
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller
@@ -27,12 +25,12 @@ public class Controller
     public Text displayName;
     public Text displayHobby;
     public Text displayBirthday;
-    public Button btnDeleteFriend;
     public Tab tabAllFriends;
     public Tab tabCreateFriend;
+    public MenuItem btnDeleteFriend;
 
     // creates a friend on button clicked
-    public void createFriend(ActionEvent actionEvent)
+    public void createFriend(ActionEvent actionEvent) throws IOException
     {
         // make a list of all the text fields
         ArrayList<TextField> textFields = new ArrayList<>();
@@ -72,6 +70,8 @@ public class Controller
                 txtFieldFirstName.getText(), txtFieldLastName.getText(), txtFieldDay.getText(),
                 txtFieldMonth.getText(), txtFieldYear.getText(), txtFieldHobby.getText());
         friendsList.getItems().add(newFriend);
+
+        newFriend.writeToFile();
 
         tabAllFriends.setDisable(false);
         clearFields(textFields);
@@ -156,7 +156,7 @@ public class Controller
     }
 
     // delete selected friend on clicked
-    public void deleteFriend(ActionEvent actionEvent)
+    public void deleteFriend(ActionEvent actionEvent) throws IOException
     {
         // remove from list view
         friendsList.getItems().remove(friendsList.getSelectionModel().getSelectedItem());
@@ -170,5 +170,22 @@ public class Controller
         {
             tabAllFriends.setDisable(true);
         }
+
+        // disable delete button
+        btnDeleteFriend.setDisable(true);
+
+        LoadData.deleteFriend("friends.txt", friendsList);
+    }
+
+    public void loadFriends(ActionEvent actionEvent) throws IOException
+    {
+        friendsList.getItems().clear();
+        ArrayList<Friend> friends = LoadData.loadAllFriends("friends.txt");
+        for (Friend f : friends)
+        {
+            friendsList.getItems().add(f);
+        }
+
+        tabAllFriends.setDisable(false);
     }
 }

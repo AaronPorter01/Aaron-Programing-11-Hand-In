@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -11,61 +14,83 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
-  <tabs>
-    <Tab fx:id="tabCreateFriend" text="Create Friend">
-         <content>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <VBox alignment="CENTER" layoutX="235.0" layoutY="73.0" prefHeight="200.0" prefWidth="220.0" spacing="15.0">
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Friends">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#loadFriends" text="Load Friends" />
+                  <MenuItem fx:id="btnDeleteFriend" disable="true" mnemonicParsing="false" onAction="#deleteFriend" text="Delete Friend" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Groups">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Save Group" />
+                  <MenuItem mnemonicParsing="false" text="New Group" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabCreateFriend" text="Create Friend">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="txtFieldFirstName" promptText="First Name" />
-                        <TextField fx:id="txtFieldLastName" promptText="Last Name" />
-                        <TextField fx:id="txtFieldHobby" layoutX="10.0" layoutY="65.0" promptText="Hobby" />
-                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="220.0" spacing="10.0">
+                        <VBox alignment="CENTER" layoutX="235.0" layoutY="73.0" prefHeight="200.0" prefWidth="220.0" spacing="15.0">
                            <children>
-                              <TextField fx:id="txtFieldMonth" promptText="Month" />
-                              <TextField fx:id="txtFieldDay" layoutX="27.0" layoutY="10.0" promptText="Day" />
-                              <TextField fx:id="txtFieldYear" layoutX="125.0" layoutY="10.0" promptText="Year" />
+                              <TextField fx:id="txtFieldFirstName" promptText="First Name" />
+                              <TextField fx:id="txtFieldLastName" promptText="Last Name" />
+                              <TextField fx:id="txtFieldHobby" layoutX="10.0" layoutY="65.0" promptText="Hobby" />
+                              <HBox alignment="CENTER" prefHeight="45.0" prefWidth="220.0" spacing="10.0">
+                                 <children>
+                                    <TextField fx:id="txtFieldMonth" promptText="Month" />
+                                    <TextField fx:id="txtFieldDay" layoutX="27.0" layoutY="10.0" promptText="Day" />
+                                    <TextField fx:id="txtFieldYear" layoutX="125.0" layoutY="10.0" promptText="Year" />
+                                 </children>
+                              </HBox>
+                              <Button fx:id="btnCreateFriend" mnemonicParsing="false" onAction="#createFriend" text="Create" />
                            </children>
-                        </HBox>
-                        <Button fx:id="btnCreateFriend" mnemonicParsing="false" onAction="#createFriend" text="Create" />
+                        </VBox>
+                        <Text fx:id="txtFirstName" layoutX="145.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+                        <Text fx:id="txtLastName" layoutX="148.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+                        <Text fx:id="txtHobby" layoutX="171.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hobby" />
+                        <Text fx:id="txtBirthday" layoutX="166.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday" />
                      </children>
-                  </VBox>
-                  <Text fx:id="txtFirstName" layoutX="145.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
-                  <Text fx:id="txtLastName" layoutX="148.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
-                  <Text fx:id="txtHobby" layoutX="171.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hobby" />
-                  <Text fx:id="txtBirthday" layoutX="166.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday" />
-               </children>
-            </AnchorPane>
-         </content></Tab>
-    <Tab fx:id="tabAllFriends" disable="true" text="All Friends">
-         <content>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0">
-               <children>
-                  <ListView fx:id="friendsList" layoutX="14.0" layoutY="14.0" onMouseClicked="#displayFriend" prefHeight="335.0" prefWidth="195.0" />
-                  <Text layoutX="330.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Friend Details" underline="true">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-                  <VBox alignment="TOP_RIGHT" layoutX="230.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab fx:id="tabAllFriends" disable="true" text="All Friends">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-                        <Text layoutX="10.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hobby:" />
-                        <Text layoutX="10.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brithday:" />
+                        <ListView fx:id="friendsList" layoutX="14.0" layoutY="14.0" onMouseClicked="#displayFriend" prefHeight="335.0" prefWidth="195.0" />
+                        <Text layoutX="330.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Friend Details" underline="true">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <VBox alignment="TOP_RIGHT" layoutX="230.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+                              <Text layoutX="10.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hobby:" />
+                              <Text layoutX="10.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday:" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="337.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <Text fx:id="displayName" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="displayHobby" layoutX="10.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                              <Text fx:id="displayBirthday" layoutX="10.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                           </children>
+                        </VBox>
                      </children>
-                  </VBox>
-                  <VBox layoutX="337.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                     <children>
-                        <Text fx:id="displayName" strokeType="OUTSIDE" strokeWidth="0.0" />
-                        <Text fx:id="displayHobby" layoutX="10.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                        <Text fx:id="displayBirthday" layoutX="10.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                     </children>
-                  </VBox>
-                  <Button fx:id="btnDeleteFriend" disable="true" layoutX="477.0" layoutY="316.0" mnemonicParsing="false" onAction="#deleteFriend" text="Delete Friend" />
-               </children>
-            </AnchorPane>
-         </content></Tab>
-  </tabs>
-</TabPane>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>

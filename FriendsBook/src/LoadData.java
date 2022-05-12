@@ -3,7 +3,7 @@ import javafx.scene.control.ListView;
 import java.io.*;
 import java.util.ArrayList;
 
-public class FriendsLoader
+public class LoadData
 {
     private static String firstName;
     private static String lastName;

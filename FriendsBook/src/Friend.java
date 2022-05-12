@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.ArrayList;
+
 public class Friend
 {
     // variable declaration
@@ -17,6 +20,20 @@ public class Friend
         birthMonth = _birthMonth;
         birthYear = _birthYear;
         hobby = _hobby;
+    }
+
+    public void writeToFile() throws IOException
+    {
+        FileWriter fw = new FileWriter("friends.txt", true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(firstName + ",\r");
+        bw.write(lastName + ",\r");
+        bw.write(birthDay + ",\r");
+        bw.write(birthMonth + ",\r");
+        bw.write(birthYear + ",\r");
+        bw.write(hobby + ",\r");
+        bw.write(";\r");
+        bw.close();
     }
 
     // getters and setters
