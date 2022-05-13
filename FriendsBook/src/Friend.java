@@ -1,3 +1,5 @@
+import javafx.scene.control.ListView;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -25,6 +27,20 @@ public class Friend
     public void writeToFile() throws IOException
     {
         FileWriter fw = new FileWriter("friends.txt", true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(firstName + ",\r");
+        bw.write(lastName + ",\r");
+        bw.write(birthDay + ",\r");
+        bw.write(birthMonth + ",\r");
+        bw.write(birthYear + ",\r");
+        bw.write(hobby + ",\r");
+        bw.write(";\r");
+        bw.close();
+    }
+
+    public void deleteWriter(String fileName) throws IOException
+    {
+        FileWriter fw = new FileWriter(fileName);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(firstName + ",\r");
         bw.write(lastName + ",\r");
@@ -85,6 +101,11 @@ public class Friend
     public void setBirthYear(String birthYear)
     {
         this.birthYear = birthYear;
+    }
+
+    public String getFullBirthday()
+    {
+        return birthMonth + " " + birthDay + ", " + birthYear;
     }
 
     public String getHobby()

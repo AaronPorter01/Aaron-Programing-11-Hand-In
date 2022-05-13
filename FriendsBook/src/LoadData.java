@@ -15,7 +15,7 @@ public class LoadData
     private static BufferedReader br;
     private static ArrayList<Friend> friends = new ArrayList<>();
 
-    public static ArrayList loadAllFriends(String fileName) throws IOException
+    public static ArrayList loadGroup(String fileName) throws IOException
     {
         fr = new FileReader(fileName);
         br = new BufferedReader(fr);
@@ -42,12 +42,18 @@ public class LoadData
 
     public static void deleteFriend(String fileName, ListView<Friend> friendsList) throws IOException
     {
-        FileWriter fw = new FileWriter(fileName);
-        BufferedWriter bw = new BufferedWriter(fw);
         for (Friend f : friendsList.getItems())
         {
-            f.writeToFile();
+            f.deleteWriter(fileName);
         }
+    }
+
+    public static void clearFriends(String fileName) throws IOException
+    {
+        FileWriter fw = new FileWriter(fileName);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write("");
+        bw.close();
     }
 
     private static void parseFriend(String string)

@@ -14,26 +14,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="Friends">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#loadFriends" text="Load Friends" />
+                  <MenuItem fx:id="btnLoadAllFriends" mnemonicParsing="false" onAction="#loadAllFriends" text="Load All Friends" />
                   <MenuItem fx:id="btnDeleteFriend" disable="true" mnemonicParsing="false" onAction="#deleteFriend" text="Delete Friend" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Groups">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Save Group" />
-                  <MenuItem mnemonicParsing="false" text="New Group" />
-               </items>
-            </Menu>
+            <Menu fx:id="menuGroups" mnemonicParsing="false" text="Groups" />
         </menus>
       </MenuBar>
-      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabCreateFriend" text="Create Friend">
                <content>
@@ -62,6 +56,21 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab text="Create Group">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="240.0" layoutY="81.0" prefHeight="200.0" prefWidth="220.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="txtFieldGroupName" promptText="Group Name" />
+                              <Button mnemonicParsing="false" onAction="#createGroup" text="Create" />
+                           </children>
+                        </VBox>
+                        <Text fx:id="txtGroupName" layoutX="140.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group Name" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
           <Tab fx:id="tabAllFriends" disable="true" text="All Friends">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -72,14 +81,14 @@
                               <Font size="24.0" />
                            </font>
                         </Text>
-                        <VBox alignment="TOP_RIGHT" layoutX="230.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                        <VBox alignment="TOP_RIGHT" layoutX="230.0" layoutY="67.0" prefHeight="75.0" prefWidth="100.0" spacing="5.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
                               <Text layoutX="10.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hobby:" />
                               <Text layoutX="10.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday:" />
                            </children>
                         </VBox>
-                        <VBox layoutX="337.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                        <VBox layoutX="337.0" layoutY="67.0" prefHeight="75.0" prefWidth="100.0" spacing="5.0">
                            <children>
                               <Text fx:id="displayName" strokeType="OUTSIDE" strokeWidth="0.0" />
                               <Text fx:id="displayHobby" layoutX="10.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" />
