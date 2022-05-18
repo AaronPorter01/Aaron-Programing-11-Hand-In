@@ -24,9 +24,9 @@ public class Friend
         hobby = _hobby;
     }
 
-    public void writeToFile() throws IOException
+    public void writeToFile(String fileName) throws IOException
     {
-        FileWriter fw = new FileWriter("friends.txt", true);
+        FileWriter fw = new FileWriter(fileName, true);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(firstName + ",\r");
         bw.write(lastName + ",\r");
@@ -40,7 +40,7 @@ public class Friend
 
     public void deleteWriter(String fileName) throws IOException
     {
-        FileWriter fw = new FileWriter(fileName);
+        FileWriter fw = new FileWriter(fileName, true);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(firstName + ",\r");
         bw.write(lastName + ",\r");
@@ -50,6 +50,7 @@ public class Friend
         bw.write(hobby + ",\r");
         bw.write(";\r");
         bw.close();
+        System.out.println(firstName);
     }
 
     // getters and setters

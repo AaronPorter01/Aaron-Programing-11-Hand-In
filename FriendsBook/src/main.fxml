@@ -20,7 +20,6 @@
         <menus>
           <Menu mnemonicParsing="false" text="Friends">
             <items>
-                  <MenuItem fx:id="btnLoadAllFriends" mnemonicParsing="false" onAction="#loadAllFriends" text="Load All Friends" />
                   <MenuItem fx:id="btnDeleteFriend" disable="true" mnemonicParsing="false" onAction="#deleteFriend" text="Delete Friend" />
             </items>
           </Menu>
@@ -29,7 +28,22 @@
       </MenuBar>
       <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabCreateFriend" text="Create Friend">
+            <Tab text="Create Group">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="240.0" layoutY="81.0" prefHeight="200.0" prefWidth="220.0" spacing="15.0">
+                           <children>
+                              <TextField fx:id="txtFieldGroupName" promptText="Group Name" />
+                              <Button mnemonicParsing="false" onAction="#createGroup" text="Create" />
+                           </children>
+                        </VBox>
+                        <Text fx:id="txtGroupName" layoutX="140.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group Name" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab fx:id="tabCreateFriend" disable="true" text="Create Friend">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -56,22 +70,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Create Group">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <VBox alignment="CENTER" layoutX="240.0" layoutY="81.0" prefHeight="200.0" prefWidth="220.0" spacing="15.0">
-                           <children>
-                              <TextField fx:id="txtFieldGroupName" promptText="Group Name" />
-                              <Button mnemonicParsing="false" onAction="#createGroup" text="Create" />
-                           </children>
-                        </VBox>
-                        <Text fx:id="txtGroupName" layoutX="140.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Group Name" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-          <Tab fx:id="tabAllFriends" disable="true" text="All Friends">
+          <Tab fx:id="tabFriends" disable="true" text="Friends">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>

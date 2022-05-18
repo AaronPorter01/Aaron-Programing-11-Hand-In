@@ -1,14 +1,17 @@
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller
 {
@@ -28,14 +31,17 @@ public class Controller
     public Text displayName;
     public Text displayHobby;
     public Text displayBirthday;
-    public Tab tabAllFriends;
+    public Tab tabFriends;
     public Tab tabCreateFriend;
     public MenuItem btnDeleteFriend;
-    public MenuItem btnLoadAllFriends;
     public TabPane tabPane;
     public TextField txtFieldGroupName;
     public Menu menuGroups;
     public Text txtGroupName;
+    public MenuItem btnFindFiles;
+
+    public String currentLoadFile = "";
+    ArrayList<String> textFiles = new ArrayList<>();
 
     // creates a friend on button clicked
     public void createFriend(ActionEvent actionEvent) throws IOException
@@ -79,11 +85,10 @@ public class Controller
                 txtFieldMonth.getText(), txtFieldYear.getText(), txtFieldHobby.getText());
         friendsList.getItems().add(newFriend);
 
-        newFriend.writeToFile();
+        newFriend.writeToFile(currentLoadFile);
 
-        tabAllFriends.setDisable(false);
+        tabFriends.setDisable(false);
         clearFields(textFields);
-        btnLoadAllFriends.setDisable(false);
     }
 
     // checks that all the fields are full before creating a friend
@@ -173,7 +178,7 @@ public class Controller
         // if there is 0 friends left disable tab
         if (friendsList.getItems().stream().count() == 0)
         {
-            tabAllFriends.setDisable(true);
+            tabFriends.setDisable(true);
             // disable buttons
             btnDeleteFriend.setDisable(true);
 
@@ -184,12 +189,13 @@ public class Controller
 
             tabPane.getSelectionModel().select(tabCreateFriend);
 
-            LoadData.clearFriends("friends.txt");
+            LoadData.clearFriends(currentLoadFile);
 
             return;
         }
 
-        LoadData.deleteFriend("friends.txt", friendsList);
+        LoadData.clearFriends(currentLoadFile);
+        LoadData.deleteFriend(currentLoadFile, friendsList);
 
         // set display texts
         displayName.setText(friendsList.getSelectionModel().getSelectedItem().toString());
@@ -200,7 +206,7 @@ public class Controller
     public void loadAllFriends(ActionEvent actionEvent) throws IOException
     {
         friendsList.getItems().clear();
-        ArrayList<Friend> friends = LoadData.loadGroup("friends.txt");
+        ArrayList<Friend> friends = LoadData.loadGroup(currentLoadFile);
         for (Friend f : friends)
         {
             friendsList.getItems().add(f);
@@ -209,28 +215,37 @@ public class Controller
         friends.clear();
         if (friendsList.getItems().size() > 0)
         {
-            tabAllFriends.setDisable(false);
+            tabFriends.setDisable(false);
         }
     }
 
     public void loadGroup(ActionEvent actionEvent, String name) throws IOException
     {
-        Tab groupTab = FXMLLoader.load(getClass().getResource("groupTab.fxml"));
-        groupTab.setText(name);
-        tabPane.getTabs().add(groupTab);
-        tabPane.getSelectionModel().select(groupTab);
-        groupTab.setOnSelectionChanged(new EventHandler<Event>()
+        tabFriends.setText(name);
+        currentLoadFile = tabFriends.getText().toLowerCase() + ".txt";
+        displayName.setText("");
+        displayHobby.setText("");
+        displayBirthday.setText("");
+
+        friendsList.getItems().clear();
+        ArrayList<Friend> friends = LoadData.loadGroup(currentLoadFile);
+        if (friends.isEmpty())
+            return;
+        for (Friend f : friends)
         {
-            @Override
-            public void handle(Event event)
-            {
-                closeTab(event, groupTab);
-            }
-        });
+            friendsList.getItems().add(f);
+        }
+
+        friends.clear();
+        if (friendsList.getItems().size() > 0)
+        {
+            tabFriends.setDisable(false);
+        }
     }
 
     public void createGroup(ActionEvent actionEvent) throws IOException
     {
+        tabCreateFriend.setDisable(false);
         String groupName = txtFieldGroupName.getText();
         txtFieldGroupName.clear();
         MenuItem menuItem = new MenuItem(groupName);
@@ -266,13 +281,8 @@ public class Controller
                 }
             }
         });
-        //FileWriter fw = new FileWriter(groupName.toLowerCase() + ".txt", true);
-        //fw.close();
-    }
-
-    public void closeTab(Event event, Tab tab)
-    {
-        tabPane.getTabs().remove(tab);
-        System.out.println("close");
+        FileWriter fw = new FileWriter(groupName.toLowerCase() + ".txt", true);
+        fw.close();
+        loadGroup(actionEvent, menuItem.getText());
     }
 }
