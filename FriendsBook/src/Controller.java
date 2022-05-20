@@ -200,7 +200,7 @@ public class Controller
         displayBirthday.setText(friendsList.getSelectionModel().getSelectedItem().getFullBirthday());
     }
 
-    public void loadAllFriends(ActionEvent actionEvent) throws IOException
+    /*public void loadAllFriends(ActionEvent actionEvent) throws IOException
     {
         friendsList.getItems().clear();
         ArrayList<Friend> friends = LoadData.loadGroup(currentLoadFile);
@@ -214,16 +214,19 @@ public class Controller
         {
             tabFriends.setDisable(false);
         }
-    }
+    }*/
 
+    // load a new group of friends
     public void loadGroup(ActionEvent actionEvent, String name) throws IOException
     {
+        // set necessary variables
         tabFriends.setText(name);
         currentLoadFile = tabFriends.getText().toLowerCase() + ".txt";
         displayName.setText("");
         displayHobby.setText("");
         displayBirthday.setText("");
 
+        // clear all currently loaded friends
         friendsList.getItems().clear();
         ArrayList<Friend> friends = LoadData.loadGroup(currentLoadFile);
         if (friends.isEmpty())
@@ -233,24 +236,32 @@ public class Controller
             friendsList.getItems().add(f);
         }
 
+        // clear the list of friends used for loading the group
         friends.clear();
+
+        // set friends tab to be enabled
         if (friendsList.getItems().size() > 0)
         {
             tabFriends.setDisable(false);
         }
     }
 
+    // create a new group of friends
     public void createGroup(ActionEvent actionEvent) throws IOException
     {
+        // set necessary fields
         tabCreateFriend.setDisable(false);
         String groupName = txtFieldGroupName.getText();
         txtFieldGroupName.clear();
+        // create a new menu item
         MenuItem menuItem = new MenuItem(groupName);
+        // check that the name is a valid one
         if (groupName.contains(" ") || groupName.isEmpty())
         {
             txtGroupName.setFill(Color.RED);
             return;
         }
+        // if menu groups has items in it check to make sure the current name is the same as another group
         else if (!menuGroups.getItems().isEmpty())
         {
             for (int i = 0; i < menuGroups.getItems().size(); i++)
@@ -263,7 +274,9 @@ public class Controller
             }
         }
         txtGroupName.setFill(Color.BLACK);
+        // add the menu item to the menu
         menuGroups.getItems().add(menuItem);
+        // attach the new menu items on action event to the load group method
         menuItem.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -278,24 +291,30 @@ public class Controller
                 }
             }
         });
+        // create the text file to store any new friends in for the new group
         FileWriter fw = new FileWriter(groupName.toLowerCase() + ".txt", true);
         fw.close();
+        // load the group
         loadGroup(actionEvent, menuItem.getText());
     }
 
-    public void findMissingGroups(ActionEvent actionEvent) throws IOException
+    // find any previously saved groups
+    public void findSavedGroups(ActionEvent actionEvent) throws IOException
     {
+        // get the path to where all the group txt files are saved
         File temp = new File("_temp.txt");
         File folder = new File(temp.getAbsoluteFile().getParent());
         File[] listOfFiles = folder.listFiles();
         System.out.println(folder);
 
+        // go through each file in the directory and get all the txt files
         for (File file : listOfFiles)
         {
             if (file.getName().endsWith(".txt"))
             {
+                // create the group for the txt file
                 String fileName = file.getName().replace(".txt", "");
-                fileName = stringToUpperCase(fileName);
+                fileName = firstLetterToUppercase(fileName);
                 txtFieldGroupName.setText(fileName);
                 createGroup(actionEvent);
                 System.out.println("found");
@@ -303,7 +322,8 @@ public class Controller
         }
     }
 
-    public String stringToUpperCase(String s)
+    // make first letter of a string uppercase
+    public String firstLetterToUppercase(String s)
     {
         s = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
         return s;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class LoadData
 {
+    // variable declaration
     private static String firstName;
     private static String lastName;
     private static String birthDay;
@@ -15,13 +16,16 @@ public class LoadData
     private static BufferedReader br;
     private static ArrayList<Friend> friends = new ArrayList<>();
 
+    // load a group
     public static ArrayList loadGroup(String fileName) throws IOException
     {
+        // set upp readers
         fr = new FileReader(fileName);
         br = new BufferedReader(fr);
         String line;
         String friendString = "";
 
+        // read lines until ";" is found
         while ((line = br.readLine()) != null)
         {
             if (!line.equals(";"))
@@ -40,14 +44,17 @@ public class LoadData
         return friends;
     }
 
+    // delete a friend from group
     public static void deleteFriend(String fileName, ListView<Friend> friendsList) throws IOException
     {
+        // for each friend still in list write them to file
         for (Friend f : friendsList.getItems())
         {
-            f.deleteWriter(fileName);
+            f.writeToFile(fileName);
         }
     }
 
+    // clear everything from file
     public static void clearFriends(String fileName) throws IOException
     {
         FileWriter fw = new FileWriter(fileName);
@@ -56,8 +63,10 @@ public class LoadData
         bw.close();
     }
 
+    // adds friend correctly formatted with the correct information
     private static void parseFriend(String string)
     {
+        // declare all variables
         ArrayList<Integer> positions = new ArrayList<>();
         String firstName = "";
         String lastName = "";
@@ -65,11 +74,13 @@ public class LoadData
         String birthMonth = "";
         String birthYear = "";
         String hobby = "";
+        // set each beginning and end positions to correct spots
         for (int i = -1; (i = string.indexOf(",", i + 1)) != -1; i++)
         {
             positions.add(i);
         }
 
+        // set variables based on txt file
         for (int i = 0; i < string.length(); i++)
         {
             firstName = string.substring(0, positions.get(0));

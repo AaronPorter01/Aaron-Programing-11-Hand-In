@@ -1,7 +1,4 @@
-import javafx.scene.control.ListView;
-
 import java.io.*;
-import java.util.ArrayList;
 
 public class Friend
 {
@@ -24,8 +21,10 @@ public class Friend
         hobby = _hobby;
     }
 
+    // write friend to group file
     public void writeToFile(String fileName) throws IOException
     {
+        // write
         FileWriter fw = new FileWriter(fileName, true);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(firstName + ",\r");
@@ -38,7 +37,7 @@ public class Friend
         bw.close();
     }
 
-    public void deleteWriter(String fileName) throws IOException
+    /*public void deleteWriter(String fileName) throws IOException
     {
         FileWriter fw = new FileWriter(fileName, true);
         BufferedWriter bw = new BufferedWriter(fw);
@@ -51,7 +50,7 @@ public class Friend
         bw.write(";\r");
         bw.close();
         System.out.println(firstName);
-    }
+    }*/
 
     // getters and setters
     public String getFirstName()
