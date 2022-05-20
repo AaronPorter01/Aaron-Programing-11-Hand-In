@@ -4,8 +4,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class Main extends Application
 {
@@ -13,7 +12,7 @@ public class Main extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main.fxml")));
         primaryStage.setTitle("Friends Book");
         primaryStage.setScene(new Scene(root, 600, 432));
         primaryStage.show();

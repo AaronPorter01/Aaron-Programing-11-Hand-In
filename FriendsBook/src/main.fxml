@@ -18,9 +18,10 @@
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="Friends">
+          <Menu mnemonicParsing="false" text="Actions">
             <items>
                   <MenuItem fx:id="btnDeleteFriend" disable="true" mnemonicParsing="false" onAction="#deleteFriend" text="Delete Friend" />
+                  <MenuItem mnemonicParsing="false" onAction="#findMissingGroups" text="Find Saved Groups" />
             </items>
           </Menu>
             <Menu fx:id="menuGroups" mnemonicParsing="false" text="Groups" />

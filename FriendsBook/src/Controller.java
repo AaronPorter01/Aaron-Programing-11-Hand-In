@@ -1,7 +1,5 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -11,7 +9,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controller
 {
@@ -254,11 +251,11 @@ public class Controller
             txtGroupName.setFill(Color.RED);
             return;
         }
-        else if (menuGroups.getItems().size() > 0)
+        else if (!menuGroups.getItems().isEmpty())
         {
             for (int i = 0; i < menuGroups.getItems().size(); i++)
             {
-                if (menuItem.getText().toLowerCase().equals(menuGroups.getItems().get(i).getText().toLowerCase()))
+                if (menuGroups.getItems().get(i).getText().toLowerCase().equals(menuItem.getText().toLowerCase()))
                 {
                     txtGroupName.setFill(Color.RED);
                     return;
@@ -284,5 +281,31 @@ public class Controller
         FileWriter fw = new FileWriter(groupName.toLowerCase() + ".txt", true);
         fw.close();
         loadGroup(actionEvent, menuItem.getText());
+    }
+
+    public void findMissingGroups(ActionEvent actionEvent) throws IOException
+    {
+        File temp = new File("_temp.txt");
+        File folder = new File(temp.getAbsoluteFile().getParent());
+        File[] listOfFiles = folder.listFiles();
+        System.out.println(folder);
+
+        for (File file : listOfFiles)
+        {
+            if (file.getName().endsWith(".txt"))
+            {
+                String fileName = file.getName().replace(".txt", "");
+                fileName = stringToUpperCase(fileName);
+                txtFieldGroupName.setText(fileName);
+                createGroup(actionEvent);
+                System.out.println("found");
+            }
+        }
+    }
+
+    public String stringToUpperCase(String s)
+    {
+        s = s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
+        return s;
     }
 }
