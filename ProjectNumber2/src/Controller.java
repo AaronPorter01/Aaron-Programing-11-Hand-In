@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Controller
 {
+    // variable declarations
     public ListView<Quiz> quizList;
     public Text txtTitle;
     public Text txtQuestions;
@@ -36,24 +37,31 @@ public class Controller
     public Button btnStart;
     public Button btnEdit;
 
+    // starts selected quiz
     public void startQuiz(ActionEvent actionEvent) throws IOException
     {
+        // new quiz window is created
         FXMLLoader loader = new FXMLLoader(getClass().getResource("quizView.fxml"));
         Parent root = loader.load();
         QuizViewController viewController = loader.getController();
+        // loads quiz into new windows
         viewController.load(quizList.getSelectionModel().getSelectedItem());
 
+        // creates stage
         Stage stage = new Stage();
         stage.setTitle("Quiz Me! - Quiz");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();
     }
 
+    // deletes selected quiz
     public void deleteQuiz(ActionEvent actionEvent)
     {
+        // removes quiz from list
         Quiz quiz = quizList.getSelectionModel().getSelectedItem();
         quizList.getItems().remove(quiz);
 
+        // deletes save file
         File temp = new File("_temp.txt");
         File folder = new File(temp.getAbsoluteFile().getParent());
         File[] listOfFiles = folder.listFiles();
@@ -66,18 +74,22 @@ public class Controller
         }
     }
 
+    // loads saved quizzes
     public void loadQuizzes(ActionEvent actionEvent) throws IOException
     {
+        // clear list and find all files in directory
         quizList.getItems().clear();
-        ArrayList<Question> questions = new ArrayList<>();
         File temp = new File("_temp.txt");
         File folder = new File(temp.getAbsoluteFile().getParent());
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles)
         {
-            if (file.getName().endsWith(".txt"))
+            // finds if _Questions.txt file
+            if (file.getName().endsWith("_Questions.txt"))
             {
-                questions.addAll(QuizDataLoader.loadGroup(file.getName()));
+                // creates new quiz and adds it to the list
+                ArrayList<Question> questions = new ArrayList<>();
+                questions.addAll(QuizDataLoader.loadQuestions(file.getName()));
                 String quizName = file.getName().replace("_Questions.txt", "");
                 Quiz quiz = new Quiz(quizName);
                 quiz.getQuestions().addAll(questions);
@@ -86,13 +98,19 @@ public class Controller
             }
         }
         System.out.println(folder);
-        System.out.println(questions);
-        System.out.println(questions.get(0).getAnswers());
 
+        // reset displays and buttons
+        txtTitle.setText("Title:");
+        txtQuestions.setText("Questions:");
+        btnStart.setDisable(true);
+        btnEdit.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
+    // select quiz in list
     public void selectQuiz(MouseEvent mouseEvent)
     {
+        // set text correctly and enable buttons
         txtTitle.setText("Title: " + quizList.getSelectionModel().getSelectedItem().toString());
         txtQuestions.setText("Questions: " + quizList.getSelectionModel().getSelectedItem().getQuestions().size());
         btnStart.setDisable(false);
@@ -100,8 +118,10 @@ public class Controller
         btnDelete.setDisable(false);
     }
 
+    // creates a fresh quiz
     public void createNewQuiz(ActionEvent actionEvent)
     {
+        // reset fields, check boxes, and text
         quizQuestionsList.getItems().clear();
         txtFieldQuizTitle.setText("");
         txtFieldQuestion.setText("");
@@ -116,13 +136,17 @@ public class Controller
         btnDeleteQuestion.setDisable(true);
     }
 
+    // saves the current quiz
     public void saveQuiz(ActionEvent actionEvent) throws IOException
     {
+        // checks to make sure it has a title
         if (txtFieldQuizTitle.getText().isEmpty())
             return;
 
+        // looks through all other quizzes for one with the same name
         for (int i = 0; i < quizList.getItems().size(); i++)
         {
+            // if one has the same name it removes it
             if (quizList.getItems().get(i).toString().equals(txtFieldQuizTitle.getText()))
             {
                 quizList.getItems().remove(quizList.getItems().get(i));
@@ -131,20 +155,28 @@ public class Controller
 
         Quiz quiz = new Quiz(txtFieldQuizTitle.getText());
 
-        //if (quizQuestionsList.getItems().isEmpty())
-          //  return;
-
+        // all created questions are added to a new quiz object
         for (Question q : quizQuestionsList.getItems())
         {
             quiz.getQuestions().add(q);
         }
 
+        // new quiz is added to list of quizzes and saved to a .txt file
         quizList.getItems().add(quiz);
         quiz.writeToFile();
+
+        // reset displays and buttons
+        txtTitle.setText("Title:");
+        txtQuestions.setText("Questions:");
+        btnStart.setDisable(true);
+        btnEdit.setDisable(true);
+        btnDelete.setDisable(true);
     }
 
+    // creates a fresh question
     public void newQuestion(ActionEvent actionEvent)
     {
+        // resets all fields and check boxes
         txtFieldQuestion.setText("");
         txtFieldAnswer1.setText("");
         txtFieldAnswer2.setText("");
@@ -156,10 +188,17 @@ public class Controller
         checkBoxAnswer4.setSelected(false);
     }
 
+    // saves current question
     public void saveQuestion(ActionEvent actionEvent)
     {
+        // checks to make sure there is a question
+        if (txtFieldQuestion.getText().isEmpty())
+            return;
+
+        // looks for any questions that are the same
         for (int i = 0; i < quizQuestionsList.getItems().size(); i++)
         {
+            // replaces question if it's the same
             if (quizQuestionsList.getItems().get(i).toString().equals(txtFieldQuestion.getText()))
             {
                 quizQuestionsList.getItems().remove(quizQuestionsList.getItems().get(i));
@@ -168,30 +207,31 @@ public class Controller
 
         Question question = new Question(txtFieldQuestion.getText());
 
-        if (!txtFieldAnswer1.getText().isEmpty())
-            question.getAnswers().add(new Answer(txtFieldAnswer1.getText(), checkBoxAnswer1.isSelected()));
-        if (!txtFieldAnswer2.getText().isEmpty())
-            question.getAnswers().add(new Answer(txtFieldAnswer2.getText(), checkBoxAnswer2.isSelected()));
-        if (!txtFieldAnswer3.getText().isEmpty())
-            question.getAnswers().add(new Answer(txtFieldAnswer3.getText(), checkBoxAnswer3.isSelected()));
-        if (!txtFieldAnswer4.getText().isEmpty())
-            question.getAnswers().add(new Answer(txtFieldAnswer4.getText(), checkBoxAnswer4.isSelected()));
+        // answers are added to a new question object
+        question.getAnswers().add(new Answer(txtFieldAnswer1.getText(), checkBoxAnswer1.isSelected()));
+        question.getAnswers().add(new Answer(txtFieldAnswer2.getText(), checkBoxAnswer2.isSelected()));
+        question.getAnswers().add(new Answer(txtFieldAnswer3.getText(), checkBoxAnswer3.isSelected()));
+        question.getAnswers().add(new Answer(txtFieldAnswer4.getText(), checkBoxAnswer4.isSelected()));
 
+        // checks that there is answers
         if (question.getAnswers().isEmpty())
             return;
 
+        // adds question to list
         quizQuestionsList.getItems().add(question);
     }
 
+    // deletes current question
     public void deleteQuestion(ActionEvent actionEvent) throws IOException
     {
+        // remove question from list
         Question question = quizQuestionsList.getSelectionModel().getSelectedItem();
         quizQuestionsList.getItems().remove(question);
 
+        // remove question from save file
         File temp = new File("_temp.txt");
         File folder = new File(temp.getAbsoluteFile().getParent());
         File[] listOfFiles = folder.listFiles();
-
         for (File file : listOfFiles)
         {
             if (file.getName().equals(txtFieldQuestion.getText()))
@@ -203,6 +243,7 @@ public class Controller
             }
         }
 
+        // reset fields and check boxes
         txtFieldQuestion.setText("");
         txtFieldAnswer1.setText("");
         txtFieldAnswer2.setText("");
@@ -214,6 +255,7 @@ public class Controller
         checkBoxAnswer4.setSelected(false);
     }
 
+    // marks clicked box as true and all others false
     public void markTrue(ActionEvent actionEvent)
     {
         CheckBox answer = (CheckBox) actionEvent.getSource();
@@ -221,6 +263,8 @@ public class Controller
         if (!answer.isSelected())
             return;
 
+        // if answer id is not equal set that box to false
+        // makes sure only 1 box is checked at a time
         if (!answer.getId().equals("1") || txtFieldAnswer1.getText().isEmpty())
             checkBoxAnswer1.setSelected(false);
         if (!answer.getId().equals("2") || txtFieldAnswer2.getText().isEmpty())
@@ -233,10 +277,12 @@ public class Controller
         System.out.println(answer.getId());
     }
 
+    // select question in list
     public void selectedQuizQuestion(MouseEvent mouseEvent)
     {
         CheckBox[] checkBoxes = {checkBoxAnswer1, checkBoxAnswer2, checkBoxAnswer3, checkBoxAnswer4};
 
+        // create a new question object and set fields to show saved information
         Question question = quizQuestionsList.getSelectionModel().getSelectedItem();
         txtFieldQuestion.setText(question.toString());
         txtFieldAnswer1.setText(question.getAnswers().get(0).toString());
@@ -246,6 +292,7 @@ public class Controller
 
         btnDeleteQuestion.setDisable(false);
 
+        // set check box to true or false depending on the saved answer
         for (int i = 0; i < question.getAnswers().size(); i++)
         {
             if (question.getAnswers().get(i).isCorrect())
@@ -259,8 +306,10 @@ public class Controller
         }
     }
 
+    // opens selected quiz in the quiz editor
     public void editQuiz(ActionEvent actionEvent)
     {
+        // open correct tab and load saved information (title, questions, answers)
         Quiz quiz = quizList.getSelectionModel().getSelectedItem();
         tabPane.getSelectionModel().select(tabCreateQuiz);
         quizQuestionsList.getItems().clear();

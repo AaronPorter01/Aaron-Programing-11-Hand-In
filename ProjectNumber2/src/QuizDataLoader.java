@@ -4,7 +4,8 @@ import java.util.List;
 
 public class QuizDataLoader
 {
-    public static ArrayList loadGroup(String fileName) throws IOException
+    // loads all questions in save file
+    public static ArrayList loadQuestions(String fileName) throws IOException
     {
         ArrayList<Question> questions = new ArrayList<>();
 
@@ -33,6 +34,7 @@ public class QuizDataLoader
         return questions;
     }
 
+    // called to remove a question from a save file
     public static void  deleteQuestion(String fileName, List<Question> questions) throws IOException
     {
         Quiz quiz = new Quiz(fileName);
@@ -40,6 +42,7 @@ public class QuizDataLoader
         quiz.writeToFile();
     }
 
+    // gets information from save file and assigns variables to it
     private static void parseQuiz(String questionStrings, ArrayList<Question> questions)
     {
         // declare all variables
@@ -60,12 +63,7 @@ public class QuizDataLoader
         answerStrings.add(questionStrings.substring(positions.get(2) + 1, positions.get(3)));
         answerStrings.add(questionStrings.substring(positions.get(3) + 1, positions.get(4)));
 
-        /*for (int j = 0; j < positions.size() - 1; j++)
-        {
-            answerStrings.add(quizString.substring(positions.get(j) + 1, positions.get(j + 1)));
-            System.out.println(positions.get(j) + 1 + positions.get(j + 1));
-        }*/
-
+        // add answer strings and true/false values to question
         Question temp = new Question(question);
         for (String a : answerStrings)
         {

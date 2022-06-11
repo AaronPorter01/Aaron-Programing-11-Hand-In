@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Question
 {
+    // variable declarations
     private ArrayList<Answer> answers;
     private String question;
     private boolean correctAnswer;
@@ -13,6 +14,7 @@ public class Question
         correctAnswer = false;
     }
 
+    // getters and setters
     public ArrayList<Answer> getAnswers()
     {
         return answers;

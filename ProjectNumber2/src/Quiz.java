@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Quiz
 {
+    // variable declarations
     private ArrayList<Question> questions;
     private String title;
 
@@ -14,6 +15,7 @@ public class Quiz
         questions = new ArrayList<>();
     }
 
+    // saves information to .txt file
     public void writeToFile() throws IOException
     {
         // write
@@ -24,6 +26,7 @@ public class Quiz
             bw.write(q.toString() + ",\r");
             for (Answer a : q.getAnswers())
             {
+                // write answer string and then the true/false value after
                 bw.write(a.toString() + "." + a.isCorrect() + ",\r");
             }
             bw.write(";\r");
@@ -31,6 +34,7 @@ public class Quiz
         bw.close();
     }
 
+    // getters and setters
     public ArrayList<Question> getQuestions()
     {
         return questions;

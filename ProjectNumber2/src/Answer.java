@@ -1,5 +1,6 @@
 public class Answer
 {
+    // variable declarations
     private String answer;
     private boolean isCorrect;
 
@@ -9,6 +10,7 @@ public class Answer
         this.isCorrect = isCorrect;
     }
 
+    // getters and setters
     public String toString()
     {
         return answer;
